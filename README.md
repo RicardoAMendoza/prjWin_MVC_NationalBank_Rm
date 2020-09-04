@@ -59,7 +59,7 @@ With C# and Visual Studio the class diagram is implemented.
  
 ### Data Base Selection.
 
-![Data Base Selection](/img/SelectingServer.jpg "Data Base Selection")
+![Data Base Selection](/img/SelectingServer.JPG "Data Base Selection")
  
 ### Create the database with SQl server. 
 
