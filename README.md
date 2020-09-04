@@ -57,6 +57,10 @@ With C# and Visual Studio the class diagram is implemented.
  * [Dowland the Layer Architecture NationalBank SqlServer project](https://github.com/RicardoAMendoza/LayerArchitecture_Cs_NationalBank_SqlServer)
  
  
+### Data Base Selection.
+
+![Data Base Selection](/img/SelectingServer.jpg "Data Base Selection")
+ 
 ### Create the database with SQl server. 
 
 1.- Create the data base : open SQL Server Management Studio, open a new query and run SqlServer/1_init_DataBase.sql
