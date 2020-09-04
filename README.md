@@ -1,20 +1,20 @@
 # The National Bank
 
-## LAYER ARCHITECTURE
+## MVC ARCHITECTURE
 
-## Project name : prjWin_MVC_NationalBank_SqlServer_Rm
+## Project name : prjWin_MVC_NationalBank_Rm
 
 Winter - 2017
 
 
 ## Description
 
-In this project we will develop a Bank Application able to make Deposit, Withdraw and Consult. The app will be handle by an admin to administrate directors, agencies, customers, the diferent accounts and reports. The app will includ concepts of Object Oriented Programming, concepts of layer architecture, database with Sql Server and relationship between classes in C # .NET.
+In this project we will develop a Bank Application able to make Deposit, Withdraw and Consult. The app will be handle by an admin to administrate directors, agencies, customers, the diferent accounts and reports. The app will includ concepts of Object Oriented Programming, concepts of MVC architecture, database with Sql Server and relationship between classes in C # .NET.
 
 
-### This project focuses on layer architecture.
+### This project focuses on MVC architecture.
 
-![Layers Entity](/img/layersEntity.JPG "Layers Entity")
+![MVC Entity](/img/MVCmodel.JPG "MVC Entity")
 
 
 ### Problem
