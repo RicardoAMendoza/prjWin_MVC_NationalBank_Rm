@@ -1,94 +1,41 @@
 -- This project uses the following licenses:
 -- MIT License
--- Copyright (c) 2018 Ricardo Mendoza 
+-- Copyright (c) 2020 Ricardo Mendoza 
 -- Montréal Québec Canada
 
--- Repository : MVC_winapp_NationalBank_SqlServer > https://github.com/RicardoAMendoza/MVC_winapp_NationalBank_SqlServer.git
--- Project : prjWin_MVC_NationalBank_SqlServer_Rm
+-- Repository : https://github.com/RicardoAMendoza/prjWin_MVC_NationalBank_Rm
+-- Project : prjWin_MVC_NationalBank_Rm
 -- Instruction :
 -- Copy and paste on SqlServer script and run it. That will create de data base
 
+-- DROP DATABASE bd_MVC_NationalBank
+
 -- -----------------------------------------------------
--- Data base bd_aspcrud_examen
+-- Data base bd_MVC_NationalBank
 -- -----------------------------------------------------
-CREATE DATABASE bd_NationalBank
+CREATE DATABASE bd_MVC_NationalBank
 Go
 -- -----------------------------------------------------
 -- Tables 
 -- -----------------------------------------------------
 
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 Go
 -- -----------------------------------------------------
--- 1.- Table `bd_NationalBank`.`tbank`
+-- 1.- Table `bd_MVC_NationalBank`.`tagencies`
 -- -----------------------------------------------------
-CREATE TABLE tbank
-(
-idbank INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
-name VARCHAR (45) NULL DEFAULT NULL,
-capital DECIMAL(22,6) NULL DEFAULT NULL,
-address VARCHAR (45) NULL DEFAULT NULL,
-)
+-- Tip: To specify that the "idagencies" column should start at value 10 and increment by 5, change it to IDENTITY(10,5).
 
--- -----------------------------------------------------
--- 2.- Table `bd_NationalBank`.`tdirectorgeneral`
--- -----------------------------------------------------
-CREATE TABLE tdirectorgeneral
-(
-iddirector INT NOT NULL IDENTITY (1,1), -- auto increment
-idbank INT NOT NULL,
-directorNumber VARCHAR (45) NULL DEFAULT NULL,
-name VARCHAR (45) NULL DEFAULT NULL,
-lastName VARCHAR (45) NULL DEFAULT NULL,
-email VARCHAR (45) NULL DEFAULT NULL,
-img VARCHAR (45) NULL DEFAULT NULL,
-salary DECIMAL(22,6) NULL DEFAULT NULL,
-sexe VARCHAR (1) NULL DEFAULT NULL,
-active VARCHAR (1) NULL DEFAULT NULL,
-PRIMARY KEY (iddirector, idbank),
---- REFERNCES
-CONSTRAINT Relation_a_tbank FOREIGN KEY (idbank) REFERENCES tbank(idbank)
--- DECIMAL(22,6)
--- Precision is the number of digits in a number. 
--- Scale is the number of digits to the right of the DECIMAL point in a number.
--- For example, the number 123.45 
--- has a precision of 5 and a scale of 2.
-)
-
--- -----------------------------------------------------
--- 3.- Table `bd_NationalBank`.`tdirectoragency`
--- -----------------------------------------------------
-CREATE TABLE tdirectoragency
-(
-iddirectorAgency INT IDENTITY (1,1) not NULL PRIMARY KEY,
-directorNumber VARCHAR (45) NULL DEFAULT NULL,
-name VARCHAR(45) NULL DEFAULT NULL,
-lastName VARCHAR(45) NULL DEFAULT NULL,
-email VARCHAR(45) NULL DEFAULT NULL,
-img VARCHAR (45) NULL DEFAULT NULL,
-salary DECIMAL(22,6) NULL DEFAULT NULL,
-sexe VARCHAR (1) NULL DEFAULT NULL,
-active VARCHAR (1),
-)
-
--- -----------------------------------------------------
--- 4.- Table `bd_NationalBank`.`tagencies`
--- -----------------------------------------------------
 CREATE TABLE tagencies
 (
-idagencies INT IDENTITY (1,1) not NULL PRIMARY KEY,
+idagencies INT IDENTITY(10,5) not NULL PRIMARY KEY,
 agencyNumber VARCHAR (45) NULL DEFAULT NULL,
 name VARCHAR (45)  NULL DEFAULT NULL,
 address VARCHAR (45) NULL DEFAULT NULL,
-idbank INT not NULL,
-iddirectorAgency INT not NULL,
---- REFERNCES
-CONSTRAINT Relation_a_tbank_2 FOREIGN KEY (idbank) REFERENCES tbank(idbank),
-CONSTRAINT Relation_a_tdirectoragency FOREIGN KEY (iddirectorAgency) REFERENCES tdirectoragency(iddirectorAgency) 
 )
 
 -- -----------------------------------------------------
--- 5.- Table `bd_NationalBank`.`tarea`
+-- 2.- Table `bd_MVC_NationalBank`.`tarea`
 -- -----------------------------------------------------
 CREATE TABLE tarea
 (
@@ -97,11 +44,11 @@ description VARCHAR (45) NULL DEFAULT NULL,
 ) 
 
 -- -----------------------------------------------------
--- 6.- Table `bd_NationalBank`.`temployee`
+-- 3.- Table `bd_MVC_NationalBank`.`temployee`
 -- -----------------------------------------------------
 CREATE TABLE temployee
 (
-idemployee INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
+idemployee INT IDENTITY(10,5) NOT NULL PRIMARY KEY,
 employeeNumber VARCHAR(45) NULL DEFAULT NULL,
 name VARCHAR (45) NULL DEFAULT NULL,
 lastName VARCHAR (45) NULL DEFAULT NULL,
@@ -117,7 +64,7 @@ CONSTRAINT Relation_a_tagencies FOREIGN KEY (idagencies) REFERENCES tagencies(id
 )
 
 -- -----------------------------------------------------
--- 7.- Table `bd_NationalBank`.`temploy_area`
+-- 4.- Table `bd_MVC_NationalBank`.`temploy_area`
 -- -----------------------------------------------------
 CREATE TABLE temploy_area
 (
@@ -130,11 +77,11 @@ CONSTRAINT Relation_a_tarea FOREIGN KEY (codearea) REFERENCES tarea(codearea)
 )
 
 -- -----------------------------------------------------
--- 8.- Table `bd_NationalBank`.`tclient`
+-- 5.- Table `bd_MVC_NationalBank`.`tclient`
 -- -----------------------------------------------------
 CREATE TABLE tclient
 (
-idclient INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+idclient INT IDENTITY(10,5) NOT NULL PRIMARY KEY,
 clientNumber VARCHAR (45) NULL DEFAULT NULL,
 name VARCHAR (45) NULL DEFAULT NULL,
 lastName VARCHAR (45) NULL DEFAULT NULL,
@@ -146,18 +93,16 @@ nip VARCHAR (45) NULL DEFAULT NULL,
 sexe VARCHAR (1) NULL DEFAULT NULL,
 active VARCHAR (1) NULL DEFAULT NULL,
 idagencies INT NOT NULL,
-idemployee INT NOT NULL,
 --- REFERNCES
 CONSTRAINT Relation_a_tagencies_2 FOREIGN KEY (idagencies) REFERENCES tagencies(idagencies),
-CONSTRAINT Relation_a_temployee_2 FOREIGN KEY (idemployee) REFERENCES temployee(idemployee)
 )
 
 -- -----------------------------------------------------
--- 9.- Table `bd_NationalBank`.`taccount`
+-- 6.- Table `bd_MVC_NationalBank`.`taccount`
 -- -----------------------------------------------------
 CREATE TABLE taccount
 (
-idaccount INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+idaccount INT IDENTITY(10,5) NOT NULL PRIMARY KEY,
 number VARCHAR (45) NULL DEFAULT NULL,
 balance DECIMAL (22,6) NULL DEFAULT NULL,
 openDate DATETIME NULL DEFAULT NULL,
@@ -166,11 +111,11 @@ idagencies INT NOT NULL,
 )
 
 -- -----------------------------------------------------
--- 10.- Table `bd_NationalBank`.`taccounttype`
+-- 7.- Table `bd_MVC_NationalBank`.`taccounttype`
 -- -----------------------------------------------------
 CREATE TABLE taccounttype
 (
-idaccounttype INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+idaccounttype INT IDENTITY(10,5) NOT NULL PRIMARY KEY,
 accountType VARCHAR (45) NULL DEFAULT NULL,
 comission DECIMAL(22,6) NULL DEFAULT NULL,
 overdraft DECIMAL (22,6) NULL DEFAULT NULL,
@@ -178,7 +123,7 @@ interestRate DECIMAL (22,6) NULL DEFAULT NULL,
 )
 
 -- -----------------------------------------------------
--- 11.- Table `bd_NationalBank`.`tclient_account`
+-- 8.- Table `bd_MVC_NationalBank`.`tclient_account`
 -- -----------------------------------------------------
 CREATE TABLE tclient_account
 (
@@ -193,28 +138,11 @@ CONSTRAINT Relation_a_tclient FOREIGN KEY (idclient) REFERENCES tclient(idclient
 )
 
 -- -----------------------------------------------------
--- 12.- Table `bd_NationalBank`.`tadmin`
+-- 9.- Table `bd_MVC_NationalBank`.`ttransaction`
 -- -----------------------------------------------------
-CREATE TABLE tadmin
-(
-idadmin INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-adminNumber VARCHAR (45) NULL DEFAULT NULL,
-name VARCHAR(45) NULL DEFAULT NULL,
-lastName VARCHAR(45) NULL DEFAULT NULL,
-email VARCHAR(45) NULL DEFAULT NULL,
-img VARCHAR(45) NULL DEFAULT NULL,
-password VARCHAR(45) NULL DEFAULT NULL,
-sexe VARCHAR (1) NULL DEFAULT NULL,
-active VARCHAR (1) NULL DEFAULT NULL,
-)
-
--- -----------------------------------------------------
--- 13.- Table `bd_NationalBank`.`ttransaction`
--- -----------------------------------------------------
-
 CREATE TABLE ttransaction
 (
-idtransaction INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+idtransaction INT IDENTITY(10,5) NOT NULL PRIMARY KEY,
 balance DECIMAL(22,6) NULL DEFAULT NULL,
 transactionDate DATETIME NULL DEFAULT NULL,
 comission DECIMAL (22,6) NULL DEFAULT NULL,
@@ -227,3 +155,34 @@ idagencies INT NOT NULL,
 --- REFERNCES
 CONSTRAINT Relation_a_taccount FOREIGN KEY (idaccount) REFERENCES taccount(idaccount)
 )
+
+-- -----------------------------------------------------
+-- 10.- Table `bd_MVC_NationalBank`.`tadmin`
+-- -----------------------------------------------------
+CREATE TABLE tadmin
+(
+idadmin INT IDENTITY(10,5) NOT NULL PRIMARY KEY,
+adminNumber VARCHAR (45) NULL DEFAULT NULL,
+name VARCHAR(45) NULL DEFAULT NULL,
+lastName VARCHAR(45) NULL DEFAULT NULL,
+email VARCHAR(45) NULL DEFAULT NULL,
+img VARCHAR(45) NULL DEFAULT NULL,
+password VARCHAR(45) NULL DEFAULT NULL,
+sexe VARCHAR (1) NULL DEFAULT NULL,
+active VARCHAR (1) NULL DEFAULT NULL,
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -65,7 +65,7 @@ With C# and Visual Studio the class diagram is implemented.
 
 1.- Create the data base : open SQL Server Management Studio, open a new query and run SqlServer/1_init_DataBase.sql
 
-[LayerArchitecture_Cs_NationalBank_SqlServer/SqlServer/1_init_DataBase.sql](https://github.com/RicardoAMendoza/LayerArchitecture_Cs_NationalBank_SqlServer/blob/master/SqlServer/1_init_DataBase.sql)
+[prjWin_MVC_NationalBank_Rm/blob/master/SqlServer/1_init_DataBase.sql](https://github.com/RicardoAMendoza/prjWin_MVC_NationalBank_Rm/blob/master/SqlServer/1_init_DataBase.sql)
 
 2.- Create the Stored Procedures : run SqlServer/2_create_StoredProcedures.sql
 
@@ -86,9 +86,9 @@ static private string stringConnection = "Data Source = .; DataBase = bd_Nationa
 ```
 
 
-### Data Base Diagram.
+### Data Base Diagram bd_MVC_NationalBank.
 
-![DataBaseDiagram](/img/databaseDiagrame.jpg "DataBaseDiagram")
+![DataBaseDiagram](/img/DATABASE_bd_MVC_NationalBank.jpg "DataBaseDiagram")
 
 
 ## Author
