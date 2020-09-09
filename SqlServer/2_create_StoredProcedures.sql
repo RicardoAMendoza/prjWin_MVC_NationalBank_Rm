@@ -1,109 +1,19 @@
 -- This project uses the following licenses:
 -- MIT License
--- Copyright (c) 2018 Ricardo Mendoza 
+-- Copyright (c) 2020 Ricardo Mendoza 
 -- Montréal Québec Canada
 
--- Repository : MVC_winapp_NationalBank_SqlServer > https://github.com/RicardoAMendoza/MVC_winapp_NationalBank_SqlServer.git
--- Project : prjWin_MVC_NationalBank_SqlServer_Rm
+-- Repository : https://github.com/RicardoAMendoza/prjWin_MVC_NationalBank_Rm
+-- Project : prjWin_MVC_NationalBank_Rm
 -- Instruction :
 -- Copy and paste on SqlServer script and run it. That will create de data base
 
--- -----------------------------------------------------
--- 1.- Procedure sp_save_bank
--- -----------------------------------------------------
-USE bd_NationalBank
-GO
-
-Create PROC [dbo].[sp_save_bank]
-
- @aidbank int = NULL,
- @aname varchar(45)= NULL,
- @acapital DECIMAL(22,6)= NULL,
- @aaddress varchar(45)= NULL
- 
-AS
-BEGIN
-
-IF @aidbank = 0 
-INSERT INTO tbank(name,capital,address)
-VALUES (@aname,@acapital,@aaddress);
-ELSE
-UPDATE tbank 
-SET name=@aname,capital=@acapital,address=@aaddress
-WHERE idbank=@aidbank
-
-END
-GO
+-- DROP DATABASE bd_MVC_NationalBank
 
 -- -----------------------------------------------------
--- 2.- sp_save_directorgeneral
+-- 1.- sp_save_agencies
 -- -----------------------------------------------------
-USE bd_NationalBank
-GO
-
-CREATE PROC sp_save_directorgeneral
-
- @aiddirector INT = NULL,
- @aidbank INT = NULL,
- @adirectorNumber varchar(45)= NULL,
- @aname varchar(45)= NULL,
- @alastName varchar(45)= NULL,
- @aemail varchar(45)= NULL,
- @aimg varchar(45)= NULL,
- @asalary DECIMAL(22,6)= NULL,
- @asexe varchar (1) = null,
- @aactive VARCHAR (1) = NULL
-
-AS
-BEGIN
-
-IF @aiddirector = 0 
-INSERT INTO tdirectorgeneral(idbank,directorNumber,name,lastName,email,img,salary,sexe,active)
-VALUES (@aidbank,@adirectorNumber,@aname,@alastName,@aemail,@aimg,@asalary,@asexe,@aactive);
-ELSE
-UPDATE tdirectorgeneral 
-SET idbank=@aidbank,directorNumber=@adirectorNumber,name=@aname,lastName=@alastName,email=@aemail,img=@aimg, salary=@asalary,sexe=@asexe,active=@aactive
-WHERE iddirector=@aiddirector
-
-END
-GO
-
--- -----------------------------------------------------
--- 3.- sp_save_directoragencie
--- -----------------------------------------------------
-USE bd_NationalBank
-GO
-
-Create PROC sp_save_directoragencie
-
- @aiddirectorAgency int = NULL,
- @adirectorNumber varchar(45)= NULL,
- @aname varchar(45)= NULL,
- @alastName varchar(45)= NULL,
- @aemail varchar(45)= NULL,
- @aimg varchar(45)= NULL,
- @asalary DECIMAL(22,6)= NULL,
- @asexe varchar (1) = null,
- @aactive varchar(1)= NULL
-
-AS
-BEGIN
-
-IF @aiddirectorAgency = 0 
-INSERT INTO tdirectoragency(directorNumber,name,lastName,email,img,salary,sexe,active)
-VALUES (@adirectorNumber,@aname,@alastName,@aemail,@aimg,@asalary,@asexe,@aactive);
-ELSE
-UPDATE tdirectoragency 
-SET directorNumber=@adirectorNumber,name=@aname,lastName=@alastName,email=@aemail,img=@aimg, salary=@asalary,sexe=@asexe,active=@aactive
-WHERE iddirectorAgency=@aiddirectorAgency
-
-END
-GO
-
--- -----------------------------------------------------
--- 4.- sp_save_agencies
--- -----------------------------------------------------
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
 CREATE PROCEDURE sp_save_agencies
@@ -133,9 +43,9 @@ END
 GO
 
 -- -----------------------------------------------------
--- 5.- sp_save_area
+-- 2.- sp_save_area
 -- -----------------------------------------------------
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
 CREATE proc sp_save_area
@@ -157,9 +67,9 @@ END
 GO
 
 -- -----------------------------------------------------
--- 6.- sp_save_employee
+-- 3.- sp_save_employee
 -- -----------------------------------------------------
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
 CREATE PROCEDURE sp_save_employee
@@ -189,10 +99,10 @@ END
 GO
 
 -- -----------------------------------------------------
--- 7.- sp_save_employ_area
+-- 4.- sp_save_employ_area
 -- -----------------------------------------------------
 
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
 CREATE PROCEDURE sp_save_employ_area
@@ -213,10 +123,10 @@ END
 GO
 
 -- -----------------------------------------------------
--- 8.- sp__save_client
+-- 5.- sp__save_client
 -- -----------------------------------------------------
 
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
 CREATE PROCEDURE [dbo].[sp_save_client]
@@ -231,35 +141,33 @@ CREATE PROCEDURE [dbo].[sp_save_client]
 @anip varchar(45) = null,
 @asexe varchar (1) = null,
 @aactive varchar (1) = null,
-@aidagencies int = null,
-@aidemployee int = null
+@aidagencies int = null
 
 AS
 BEGIN
 
 IF @aidclient = 0
-INSERT INTO tclient(clientNumber,name,lastName,email,img,address,cardNumber,nip,sexe,active,idagencies,idemployee)
-VALUES (@aclientNumber,@aname,@alastName,@aemail,@aimg,@aaddress,@acardNumber,@anip,@asexe,@aactive,@aidagencies,@aidemployee);
--- SELECT 
--- MAX(idclient)
--- INTO @aidclient FROM
--- tclient;
+INSERT INTO tclient(clientNumber,name,lastName,email,img,address,cardNumber,nip,sexe,active,idagencies)
+VALUES (@aclientNumber,@aname,@alastName,@aemail,@aimg,@aaddress,@acardNumber,@anip,@asexe,@aactive,@aidagencies);
+ --SELECT 
+ --MAX(idclient)
+ --INTO @aidclient FROM tclient;
 ELSE
 UPDATE tclient 
 SET clientNumber = @aclientNumber , name = @aname , lastName = @alastName ,
     email = @aemail , img = @aimg , address = @aaddress , cardNumber = @acardNumber,
 	nip=@anip,sexe=@asexe,active=@aactive,
-	idagencies = @aidagencies, idemployee = @aidemployee
+	idagencies = @aidagencies
 WHERE idclient = @aidclient 
 
 END
 GO
 
 -- -----------------------------------------------------
--- 9.- sp_save_account
+-- 6.- sp_save_account
 -- -----------------------------------------------------
 
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
 CREATE PROC [dbo].[sp_save_account]
@@ -288,7 +196,7 @@ GO
 -- 10.- sp_save_accounttype
 -- -----------------------------------------------------
 
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
 CREATE procedure [dbo].[sp_save_accounttype]
@@ -315,7 +223,7 @@ GO
 -- 11.- sp_save_client_account
 -- -----------------------------------------------------
 
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
 CREATE proc [dbo].[sp_save_client_account]
@@ -342,7 +250,7 @@ BEGIN
 -- 12.- sp_save_admin
 -- -----------------------------------------------------
 
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
 CREATE PROC [dbo].[sp_save_admin]
@@ -374,10 +282,10 @@ GO
 -- =============================================
 -- Author:		Ricardo Mendoza
 -- Create date: 3-12-2018
--- Description:	Select agencies from bd_NationalBank
+-- Description:	Select agencies from bd_MVC_NationalBank
 -- 13.- selectAgencies
 -- =============================================
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 CREATE PROCEDURE selectAgencies
 AS 
@@ -396,10 +304,10 @@ GO
 -- =============================================
 -- Author:		Ricardo Mendoza
 -- Create date: 3-12-2018
--- Description:	Select admins from bd_NationalBank
+-- Description:	Select admins from bd_MVC_NationalBank
 -- 14.- selectAdmins
 -- =============================================
-USE [bd_NationalBank]
+USE [bd_MVC_NationalBank]
 GO
 CREATE PROCEDURE selectAdmins
 AS 
@@ -421,10 +329,10 @@ GO
 -- =============================================
 -- Author:		Ricardo Mendoza
 -- Create date: 3-12-2018
--- Description:	Select Directors from bd_NationalBank
+-- Description:	Select Directors from bd_MVC_NationalBank
 -- 15.- selectDirectors
 -- =============================================
-USE [bd_NationalBank]
+USE [bd_MVC_NationalBank]
 GO
 CREATE PROCEDURE selectDirectors
 AS 
@@ -447,10 +355,10 @@ GO
 -- =============================================
 -- Author:		Ricardo Mendoza
 -- Create date: 3-12-2018
--- Description:	Select Directors Agency from bd_NationalBank
+-- Description:	Select Directors Agency from bd_MVC_NationalBank
 -- 16.- selectDirectorsAgency
 -- =============================================
-USE [bd_NationalBank]
+USE [bd_MVC_NationalBank]
 GO
 CREATE PROCEDURE selectDirectorsAgency
 AS 
@@ -475,10 +383,10 @@ GO
 -- =============================================
 -- Author:		Ricardo Mendoza
 -- Create date: 18-12-2018
--- Description:	Select employees from bd_NationalBank
+-- Description:	Select employees from bd_MVC_NationalBank
 -- .- selectEmployees
 -- =============================================
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
 CREATE PROCEDURE selectEmployees
@@ -503,10 +411,10 @@ GO
 -- =============================================
 -- Author:		Ricardo Mendoza
 -- Create date: 3-12-2018
--- Description:	Select clients from bd_NationalBank
+-- Description:	Select clients from bd_MVC_NationalBank
 -- 15.- selectClients
 -- =============================================
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
 CREATE PROCEDURE selectClients
@@ -539,10 +447,10 @@ GO
 -- =============================================
 -- Author:		Ricardo Mendoza
 -- Create date: 3-12-2018
--- Description:	Select clients by Agency from bd_NationalBank
+-- Description:	Select clients by Agency from bd_MVC_NationalBank
 -- 15.- selectqClientByAgency
 -- =============================================
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
 CREATE PROCEDURE selectqClientByAgency
@@ -556,10 +464,10 @@ GO
 -- =============================================
 -- Author:		Ricardo Mendoza
 -- Create date: 3-12-2018
--- Description:	Select clients by Agency from bd_NationalBank
+-- Description:	Select clients by Agency from bd_MVC_NationalBank
 -- 16.- selectqClientByClientNumber
 -- =============================================
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
 CREATE PROCEDURE selectqClientByNumber
@@ -573,10 +481,10 @@ GO
 -- =============================================
 -- Author:		Ricardo Mendoza
 -- Create date: 26-01-2019
--- Description:	Select client account by client name from bd_NationalBank
+-- Description:	Select client account by client name from bd_MVC_NationalBank
 -- 17.- selectAccountByClient
 -- =============================================
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
 CREATE PROCEDURE selectAccountByClientandAccountType
@@ -640,7 +548,7 @@ GO
 -- =============================================
 -- Author:		Ricardo Mendoza
 -- Create date: 26-01-2019
--- Description:	Select accounts by client name from bd_NationalBank
+-- Description:	Select accounts by client name from bd_MVC_NationalBank
 -- 18.- selectAccountByClient
 -- =============================================
 CREATE PROCEDURE selectAccountsByClient
@@ -679,11 +587,11 @@ GO
 -- =============================================
 -- Author:		Ricardo Mendoza
 -- Create date: 3-12-2018
--- Description:	Select clients by Number from bd_NationalBank
+-- Description:	Select clients by Number from bd_MVC_NationalBank
 -- 19.- selectqClientByClientNumber
 -- =============================================
 
-USE [bd_NationalBank]
+USE [bd_MVC_NationalBank]
 GO
 /****** Object:  StoredProcedure [dbo].[selectClientByNumber]    Script Date: 8/5/2019 8:13:38 PM ******/
 SET ANSI_NULLS ON
@@ -717,11 +625,11 @@ END
 -- =============================================
 -- Author:		Ricardo Mendoza
 -- Create date: 3-12-2018
--- Description:	Select clients by Condition from bd_NationalBank
+-- Description:	Select clients by Condition from bd_MVC_NationalBank
 -- 20.- selectClientByCondition
 -- =============================================
 
-USE [bd_NationalBank]
+USE [bd_MVC_NationalBank]
 GO
 /****** Object:  StoredProcedure [dbo].[selectClientByNumber]    Script Date: 8/5/2019 8:13:38 PM ******/
 SET ANSI_NULLS ON
@@ -754,10 +662,10 @@ GO
 -- =============================================
 -- Author:		Ricardo Mendoza
 -- Create date: 3-12-2018
--- Description:	Select admin by Condition from bd_NationalBank
+-- Description:	Select admin by Condition from bd_MVC_NationalBank
 -- 21.- selectAdminByCondition
 -- =============================================
-USE [bd_NationalBank]
+USE [bd_MVC_NationalBank]
 GO
 /****** Object:  StoredProcedure [dbo].[selectAdmins]    Script Date: 8/6/2019 9:47:07 PM ******/
 SET ANSI_NULLS ON

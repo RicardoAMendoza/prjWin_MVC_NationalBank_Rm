@@ -1,110 +1,19 @@
 -- This project uses the following licenses:
 -- MIT License
--- Copyright (c) 2018 Ricardo Mendoza 
+-- Copyright (c) 2020 Ricardo Mendoza 
 -- Montréal Québec Canada
 
--- Repository : MVC_winapp_NationalBank_SqlServer > https://github.com/RicardoAMendoza/MVC_winapp_NationalBank_SqlServer.git
--- Project : prjWin_MVC_NationalBank_SqlServer_Rm
+-- Repository : https://github.com/RicardoAMendoza/prjWin_MVC_NationalBank_Rm
+-- Project : prjWin_MVC_NationalBank_Rm
 -- Instruction :
 -- Copy and paste on SqlServer script and run it. That will create de data base
 
--- -----------------------------------------------------
--- 1. EXEC  sp_save_bank
--- -----------------------------------------------------
-USE bd_NationalBank
-GO
-
-EXEC sp_save_bank
-@aidbank =0,
-@aname = "National Bank",
-@acapital = 100000000,
-@aaddress = "1000 Sherbroke" 
+-- DROP DATABASE bd_MVC_NationalBank
 
 -- -----------------------------------------------------
--- 2. EXEC  sp_save_directorgeneral
+-- 1. EXEC sp_save_agencies
 -- -----------------------------------------------------
-USE bd_NationalBank
-GO
-
-EXEC  sp_save_directorgeneral
-@aiddirector = 0,
-@aidbank = 1,
-@adirectorNumber = "dir01",
-@aname = "Patrick",
-@alastName = "Dorre",
-@aemail = "dorre@gmail.com",
-@aimg = "dorre.png",
-@asalary = 80000,
-@asexe = 'M',
-@aactive ="A" 
-
-EXEC  sp_save_directorgeneral
-@aiddirector = 0,
-@aidbank = 1,
-@adirectorNumber = "dir02",
-@aname = "Fernand",
-@alastName = "Bikatal-Bi-Tonye",
-@aemail = "bikatal@gmail.com",
-@aimg = "fernand.png",
-@asalary = 90000,
-@asexe = 'M',
-@aactive ="A" 
-
-EXEC  sp_save_directorgeneral
-@aiddirector = 0,
-@aidbank = 1,
-@adirectorNumber = "dir03",
-@aname = "Richard",
-@alastName = "Saint-Vingt-Cent",
-@aemail = "bikatal@gmail.com",
-@aimg = "richard.png",
-@asalary = 60000,
-@asexe = 'M',
-@aactive ="N" 
-
--- -----------------------------------------------------
--- 3. EXEC  sp_save_directoragencie
--- -----------------------------------------------------
-USE bd_NationalBank
-GO
-
-EXEC  sp_save_directoragencie
-@aiddirectorAgency = 0,
-@adirectorNumber = "dir01",
-@aname = "Patrick",
-@alastName = "Dorre",
-@aemail = "dorre@gmail.com",
-@aimg = "dorre.png",
-@asalary = 80000,
-@asexe = 'M',
-@aactive ="N" 
-
-EXEC  sp_save_directoragencie
-@aiddirectorAgency = 0,
-@adirectorNumber = "dir02",
-@aname = "Fernand",
-@alastName = "Bikatal-Bi-Tonye",
-@aemail = "bikatal@gmail.com",
-@aimg = "fernand.png",
-@asalary = 90000,
-@asexe = 'M',
-@aactive ="N" 
-
-EXEC  sp_save_directoragencie
-@aiddirectorAgency = 0,
-@adirectorNumber = "dir03",
-@aname = "Richard",
-@alastName = "Saint-Vingt-Cent",
-@aemail = "bikatal@gmail.com",
-@aimg = "richard.png",
-@asalary = 60000,
-@asexe = 'M',
-@aactive ="A" 
-
--- -----------------------------------------------------
--- 4. EXEC sp_save_agencies
--- -----------------------------------------------------
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
 EXEC sp_save_agencies 
@@ -112,37 +21,35 @@ EXEC sp_save_agencies
 @aagencyNumber = 'A1A1',
 @aname = 'Rosemont NB',
 @aaddress = '2727 Rosemont',
-@aidbank = 1,
-@aiddirectorAgency = 1
 
 EXEC sp_save_agencies 
 @aidagencies = 0,
 @aagencyNumber = 'A2A2',
 @aname = 'MontRoyal NB',
 @aaddress = '3131 MontRoyal',
-@aidbank = 1,
-@aiddirectorAgency = 2
 
 EXEC sp_save_agencies
 @aidagencies = 0,
 @aagencyNumber = 'A3A3',
 @aname = 'Beaubien NB',
 @aaddress = '247 Beaubien',
-@aidbank = 1,
-@aiddirectorAgency = 3
 
 EXEC sp_save_agencies 
 @aidagencies = 0,
 @aagencyNumber = 'A4A4',
 @aname = 'Alexander NB',
 @aaddress = '456 Alexander',
-@aidbank = 1,
-@aiddirectorAgency = 2
+
+EXEC sp_save_agencies 
+@aidagencies = 0,
+@aagencyNumber = 'A5A5',
+@aname = 'Laval NB',
+@aaddress = '1545 Laval',
 
 -- -----------------------------------------------------
--- 5. EXEC sp_save_area
+-- 2. EXEC sp_save_area
 -- -----------------------------------------------------
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
 EXEC sp_save_area
@@ -162,10 +69,10 @@ EXEC sp_save_area
 @adescription = 'Savings'
 
 -- -----------------------------------------------------
--- 6. EXEC sp_save_employee
+-- 3. EXEC sp_save_employee
 -- -----------------------------------------------------
 
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
 EXEC sp_save_employee 
@@ -179,7 +86,7 @@ EXEC sp_save_employee
 @asalary = 150000.99,
 @asexe = 'M',
 @aactive = 'A',
-@aidagencies  = 1
+@aidagencies  = 10
 
 EXEC sp_save_employee 
 @aidemployee  = 0,
@@ -192,7 +99,7 @@ EXEC sp_save_employee
 @asalary = 150000.99,
 @asexe = 'M',
 @aactive = 'A',
-@aidagencies  = 2
+@aidagencies  = 15
 
 EXEC [dbo].[sp_save_employee] 
 @aidemployee  = 0,
@@ -205,7 +112,7 @@ EXEC [dbo].[sp_save_employee]
 @asalary = 150000.99,
 @asexe = 'F',
 @aactive = 'A',
-@aidagencies  = 3
+@aidagencies  = 20
 
 EXEC [dbo].[sp_save_employee]  
 @aidemployee  = 0,
@@ -218,7 +125,7 @@ EXEC [dbo].[sp_save_employee]
 @asalary = 150000.99,
 @asexe = 'M',
 @aactive = 'A',
-@aidagencies  = 4
+@aidagencies  = 25
 
 EXEC [dbo].[sp_save_employee]  
 @aidemployee  = 0,
@@ -231,7 +138,9 @@ EXEC [dbo].[sp_save_employee]
 @asalary = 150000.99,
 @asexe = 'F',
 @aactive = 'A',
-@aidagencies  = 1
+@aidagencies  = 30
+
+-----------------------------
 
 EXEC [dbo].[sp_save_employee]  
 @aidemployee  = 0,
@@ -244,7 +153,7 @@ EXEC [dbo].[sp_save_employee]
 @asalary = 150000.99,
 @asexe = 'F',
 @aactive = 'A',
-@aidagencies  = 2
+@aidagencies  = 10
 
 EXEC [dbo].[sp_save_employee]  
 @aidemployee  = 0,
@@ -257,7 +166,7 @@ EXEC [dbo].[sp_save_employee]
 @asalary = 100000.99,
 @asexe = 'F',
 @aactive = 'A',
-@aidagencies  = 3
+@aidagencies  = 15
 
 EXEC [dbo].[sp_save_employee]  
 @aidemployee  = 0,
@@ -270,7 +179,7 @@ EXEC [dbo].[sp_save_employee]
 @asalary = 150000.99,
 @asexe = 'F',
 @aactive = 'A',
-@aidagencies  = 4
+@aidagencies  = 20
 
 EXEC [dbo].[sp_save_employee]  
 @aidemployee  = 0,
@@ -283,7 +192,7 @@ EXEC [dbo].[sp_save_employee]
 @asalary = 150000.99,
 @asexe = 'F',
 @aactive = 'A',
-@aidagencies  = 1
+@aidagencies  = 25
 
 EXEC [dbo].[sp_save_employee] 
 @aidemployee  = 0,
@@ -296,7 +205,7 @@ EXEC [dbo].[sp_save_employee]
 @asalary = 150000.99,
 @asexe = 'M',
 @aactive = 'A',
-@aidagencies  = 2
+@aidagencies  = 30
 
 EXEC [dbo].[sp_save_employee]  
 @aidemployee  = 0,
@@ -309,7 +218,7 @@ EXEC [dbo].[sp_save_employee]
 @asalary = 150000.99,
 @asexe = 'M',
 @aactive = 'A',
-@aidagencies  = 3
+@aidagencies  = 10
 
 EXEC [dbo].[sp_save_employee] 
 @aidemployee  = 0,
@@ -322,7 +231,7 @@ EXEC [dbo].[sp_save_employee]
 @asalary = 150000.99,
 @asexe = 'M',
 @aactive = 'A',
-@aidagencies  = 4
+@aidagencies  = 15
 
 EXEC [dbo].[sp_save_employee] 
 @aidemployee  = 0,
@@ -335,69 +244,69 @@ EXEC [dbo].[sp_save_employee]
 @asalary = 150000.99,
 @asexe = 'F',
 @aactive = 'A',
-@aidagencies  = 1
+@aidagencies  = 20
 
 -- -----------------------------------------------------
--- 7. EXEC sp_save_employ_area
+-- 4. EXEC sp_save_employ_area
 -- -----------------------------------------------------
 
 Exec sp_save_employ_area
-@aidemployee = 1,
+@aidemployee = 15,
 @acodearea = 'FIN'
 
 Exec sp_save_employ_area
-@aidemployee = 2,
+@aidemployee = 20,
 @acodearea = 'FIN'
 
 Exec sp_save_employ_area
-@aidemployee = 3,
+@aidemployee = 25,
 @acodearea = 'FIN'
 
 Exec sp_save_employ_area
-@aidemployee = 4,
+@aidemployee = 30,
 @acodearea = 'FIN'
 
 Exec sp_save_employ_area
-@aidemployee = 5,
+@aidemployee = 35,
 @acodearea = 'INS'
 
 Exec sp_save_employ_area
-@aidemployee = 6,
+@aidemployee = 40,
 @acodearea = 'INS'
 
 Exec sp_save_employ_area
-@aidemployee = 7,
+@aidemployee = 45,
 @acodearea = 'INS'
 
 Exec sp_save_employ_area
-@aidemployee = 8,
+@aidemployee = 50,
 @acodearea = 'INV'
 
 Exec sp_save_employ_area
-@aidemployee = 9,
+@aidemployee = 55,
 @acodearea = 'INV'
 
 Exec sp_save_employ_area
-@aidemployee  = 10,
+@aidemployee  = 60,
 @acodearea = 'INV'
 
 Exec sp_save_employ_area
-@aidemployee  = 11,
+@aidemployee  = 65,
 @acodearea = 'SAV'
 
 Exec sp_save_employ_area
-@aidemployee = 12,
+@aidemployee = 70,
 @acodearea = 'SAV'
 
 Exec sp_save_employ_area
-@aidemployee = 13,
+@aidemployee = 75,
 @acodearea = 'SAV'
 
 -- -----------------------------------------------------
--- 8. EXEC sp_save_client
+-- 5. EXEC sp_save_client
 -- -----------------------------------------------------
 
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
 exec sp_save_client
@@ -412,8 +321,7 @@ exec sp_save_client
 @anip  = 'windows',
 @asexe = 'M',
 @aactive = 'A',
-@aidagencies  = 1,
-@aidemployee = 2
+@aidagencies  = 10
 
 exec sp_save_client
 @aidclient = 0,
@@ -427,8 +335,7 @@ exec sp_save_client
 @anip  = 'windows',
 @asexe = 'M',
 @aactive = 'A',
-@aidagencies  = 1,
-@aidemployee = 3
+@aidagencies  = 10
 
 exec sp_save_client
 @aidclient = 0,
@@ -442,8 +349,7 @@ exec sp_save_client
 @anip  = 'own',
 @asexe = 'F',
 @aactive = 'A',
-@aidagencies  = 1,
-@aidemployee = 4
+@aidagencies  = 10
 
 exec sp_save_client
 @aidclient = 0,
@@ -457,8 +363,7 @@ exec sp_save_client
 @anip  = 'pintor',
 @asexe = 'M',
 @aactive = 'A',
-@aidagencies  = 2,
-@aidemployee = 5
+@aidagencies  = 20
 
 exec sp_save_client
 @aidclient = 0,
@@ -472,8 +377,7 @@ exec sp_save_client
 @anip  = 'unix',
 @asexe = 'F',
 @aactive = 'A',
-@aidagencies  = 2,
-@aidemployee = 6
+@aidagencies  = 20
 
 exec sp_save_client
 @aidclient = 0,
@@ -487,8 +391,7 @@ exec sp_save_client
 @anip  = 'cpp',
 @asexe = 'F',
 @aactive = 'A',
-@aidagencies  = 2,
-@aidemployee = 7
+@aidagencies  = 20
 
 exec sp_save_client
 @aidclient = 0,
@@ -502,8 +405,7 @@ exec sp_save_client
 @anip  = 'facebook',
 @asexe = 'F',
 @aactive = 'A',
-@aidagencies  = 3,
-@aidemployee = 8
+@aidagencies  = 30
 
 exec sp_save_client
 @aidclient = 0,
@@ -517,8 +419,7 @@ exec sp_save_client
 @anip  = 'alfonso13',
 @asexe = 'M',
 @aactive = 'A',
-@aidagencies  = 3,
-@aidemployee = 9
+@aidagencies  = 30
 
 exec sp_save_client
 @aidclient = 0,
@@ -532,8 +433,7 @@ exec sp_save_client
 @anip  = 'quimica',
 @asexe = 'M',
 @aactive = 'A',
-@aidagencies  = 3,
-@aidemployee = 10
+@aidagencies  = 30
 
 exec sp_save_client
 @aidclient = 0,
@@ -547,8 +447,7 @@ exec sp_save_client
 @anip  = 'veracruz',
 @asexe = 'F',
 @aactive = 'A',
-@aidagencies  = 4,
-@aidemployee = 11
+@aidagencies  = 15
 
 exec sp_save_client
 @aidclient = 0,
@@ -562,8 +461,7 @@ exec sp_save_client
 @anip  = 'construccion',
 @asexe = 'M',
 @aactive = 'A',
-@aidagencies  = 4,
-@aidemployee = 12
+@aidagencies  = 15
 
 exec sp_save_client
 @aidclient = 0,
@@ -577,13 +475,12 @@ exec sp_save_client
 @anip  = 'soldadura',
 @asexe = 'M',
 @aactive = 'A',
-@aidagencies  = 4,
-@aidemployee = 1
+@aidagencies  = 15
 
 -- -----------------------------------------------------
--- 9. EXEC sp_save_account
+-- 6. EXEC sp_save_account
 -- -----------------------------------------------------
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
 -- C1C1 ----------------------------
@@ -793,7 +690,7 @@ exec sp_save_account
 -- -----------------------------------------------------
 -- 10. EXEC sp_save_accounttype
 -- -----------------------------------------------------
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
  exec sp_save_accounttype
@@ -813,7 +710,7 @@ GO
 -- -----------------------------------------------------
 -- 11. EXEC sp_save_client_account
 -- -----------------------------------------------------
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
 -- C1C1 ----------------------------
@@ -952,7 +849,7 @@ exec sp_save_client_account
 -- -----------------------------------------------------
 -- 12. EXEC sp_save_admin
 -- -----------------------------------------------------
-USE bd_NationalBank
+USE bd_MVC_NationalBank
 GO
 
 EXEC [dbo].[sp_save_admin] 

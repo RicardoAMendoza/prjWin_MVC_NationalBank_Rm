@@ -4,7 +4,7 @@
 
 ## Project name : prjWin_MVC_NationalBank_Rm
 
-Winter - 2017
+Été - 2020
 
 
 ## Description
