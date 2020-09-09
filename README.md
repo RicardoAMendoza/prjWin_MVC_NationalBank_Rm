@@ -87,7 +87,7 @@ static private string stringConnection = "Data Source = .; DataBase = bd_Nationa
 
 ## Author
 
-* **Ricardo Mendoza -  Programmer Analyst**
+### Ricardo Mendoza -  Programmer Analyst
  
  
 ## Running the tests
