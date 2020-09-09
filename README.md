@@ -23,13 +23,6 @@ A bank has several agencies spread over the Quebec territory. A bank is characte
 its global capital, its own name and the address of its head office.
 
 
-### Class Diagram Developed:
-
-With C# and Visual Studio the class diagram is implemented.
-
-![Class Diagram Developed](/img/Class_Diagram_StrategyPattern.jpg "Class Diagram Developed")
-
-
 ### Prerequisites
 
  * Microsoft Visual Studio Community 2015 Version 14.0.25425.01 Update 3
@@ -57,10 +50,6 @@ With C# and Visual Studio the class diagram is implemented.
  * [Dowland the Layer Architecture NationalBank SqlServer project](https://github.com/RicardoAMendoza/LayerArchitecture_Cs_NationalBank_SqlServer)
  
  
-### Data Base Selection.
-
-![Data Base Selection](/img/SelectingServer.JPG "Data Base Selection")
- 
 ### Create the database with SQl server. 
 
 1.- Create the data base : open SQL Server Management Studio, open a new query and run SqlServer/1_init_DataBase.sql
@@ -69,15 +58,15 @@ With C# and Visual Studio the class diagram is implemented.
 
 2.- Create the Stored Procedures : run SqlServer/2_create_StoredProcedures.sql
 
-[LayerArchitecture_Cs_NationalBank_SqlServer/SqlServer/2_create_StoredProcedures.sql](https://github.com/RicardoAMendoza/LayerArchitecture_Cs_NationalBank_SqlServer/blob/master/SqlServer/2_create_StoredProcedures.sql)
+[prjWin_MVC_NationalBank_Rm/blob/master/SqlServer/2_create_StoredProcedures.sql](https://github.com/RicardoAMendoza/prjWin_MVC_NationalBank_Rm/blob/master/SqlServer/2_create_StoredProcedures.sql)
 
 3.- Fill up the tables : run SqlServer/3_fill_Tables.sql
 
-[LayerArchitecture_Cs_NationalBank_SqlServer/SqlServer/3_fill_Tables.sql](https://github.com/RicardoAMendoza/LayerArchitecture_Cs_NationalBank_SqlServer/blob/master/SqlServer/3_fill_Tables.sql)
+[prjWin_MVC_NationalBank_Rm/blob/master/SqlServer/3_fill_Tables.sql](https://github.com/RicardoAMendoza/prjWin_MVC_NationalBank_Rm/blob/master/SqlServer/3_fill_Tables.sql)
 
 4.- Create Views : run SqlServer/4_create_Views.sql
 
-[LayerArchitecture_Cs_NationalBank_SqlServer/SqlServer/4_create_Views.sql](https://github.com/RicardoAMendoza/LayerArchitecture_Cs_NationalBank_SqlServer/blob/master/SqlServer/4_create_Views.sql)
+[prjWin_MVC_NationalBank_Rm/blob/master/SqlServer/4_create_Views.sql](https://github.com/RicardoAMendoza/prjWin_MVC_NationalBank_Rm/blob/master/SqlServer/4_create_Views.sql)
 
 5.- The class clsConnection connects the SQL Server and the Visual Studio.
 
@@ -89,6 +78,11 @@ static private string stringConnection = "Data Source = .; DataBase = bd_Nationa
 ### Data Base Diagram bd_MVC_NationalBank.
 
 ![DataBaseDiagram](/img/DATABASE_bd_MVC_NationalBank.jpg "DataBaseDiagram")
+
+
+### Data Base Selection.
+
+![Data Base Selection](/img/SelectingServer.JPG "Data Base Selection")
 
 
 ## Author
@@ -109,7 +103,7 @@ static private string stringConnection = "Data Source = .; DataBase = bd_Nationa
 
 This project uses GitHub.com as source manager in the following repository:
 
-https://github.com/RicardoAMendoza/The_NationalBank_Rm
+https://github.com/RicardoAMendoza/prjWin_MVC_NationalBank_Rm
 
 
 ## License
